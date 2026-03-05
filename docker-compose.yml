@@ -1,0 +1,20 @@
+services:
+  db:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: AmbroBugTracker
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  mail:
+    image: dockage/mailcatcher:0.9.0
+    ports:
+      - "1025:1025"
+      - "1080:1080"
+
+volumes:
+  pgdata:
