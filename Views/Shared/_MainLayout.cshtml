@@ -29,7 +29,7 @@
         @* Blue SIDEBAR - NAVIGATION*@
         <div class="sidebar px-3 py-2 py-md-3">
             <div class="d-flex flex-column h-100">
-                <a asp-route="./Dashboard" class="d-flex justify-content-center align-items-center mb-4 mt-2" style="color: white;">
+                <a asp-controller="Home" asp-action="Dashboard" class="d-flex justify-content-center align-items-center mb-4 mt-2" style="color: white;">
                     <svg xmlns="http://www.w3.org/2000/svg"
                             width="30"
                             viewBox="0 0 64 80"
@@ -85,13 +85,13 @@
 
                 <ul class="menu-list flex-grow-1">
                     <li>
-                        <a class="m-link active" href="#"><i class="bi bi-house-door"></i><span class="ms-3">Dashboard</span></a>
+                        <a class="m-link active" asp-controller="Home" asp-action="Dashboard"><i class="bi bi-house-door"></i><span class="ms-3">Dashboard</span></a>
                     </li>
                     <li>
-                        <a class="m-link" href="#"><i class="bi bi-building"></i><span class="ms-3">Company</span></a>
+                        <a class="m-link" asp-controller="Companies" asp-action="Index"><i class="bi bi-building"></i><span class="ms-3">Company</span></a>
                     </li>
                     <li>
-                        <a class="m-link" href="#"><i class="bi bi-bell"></i><span class="ms-3">Notifications</span></a>
+                        <a class="m-link" asp-controller="Notifications" asp-action="Index"><i class="bi bi-bell"></i><span class="ms-3">Notifications</span></a>
                     </li>
 
                     <li class="collapsed">
@@ -104,11 +104,17 @@
                         </a>
 
                         <ul class="sub-menu collapse" id="menu-projects">
-                            <li><a class="ms-link" href="#">All Projects</a></li>
-                            <li><a class="ms-link" href="#">My Projects</a></li>
-                            <li><a class="ms-link" href="#">Add Project</a></li>
-                            <li><a class="ms-link" href="#">Manage Projects</a></li>
-                            <li><a class="ms-link" href="#">Archived Projects</a></li>
+                            <li><a class="ms-link" asp-controller="Projects" asp-action="AllProjects">All Projects</a></li>
+                            @if (!User.IsInRole(nameof(Roles.Admin)))
+                            {
+                                <li><a class="ms-link" asp-controller="Projects" asp-action="MyProjects">My Projects</a></li>
+                            }
+                            @if (User.IsInRole(nameof(Roles.Admin)))
+                            {
+                                <li><a class="ms-link" asp-controller="Projects" asp-action="Create">Add Project</a></li>
+                                <li><a class="ms-link" asp-controller="Projects" asp-action="UnassignedProjects">Manage Projects</a></li>
+                            }
+                            <li><a class="ms-link" asp-controller="Projects" asp-action="ArchivedProjects">Archived Projects</a></li>
                         </ul>
                     </li>
 
@@ -122,14 +128,22 @@
                         </a>
 
                         <ul class="sub-menu collapse" id="menu-Tickets">
-                            <li><a class="ms-link" href="#">All Tickets</a></li>
-                            <li><a class="ms-link" href="#">My Tickets</a></li>
-                            <li><a class="ms-link" href="#">Add Tickets</a></li>
-                            <li><a class="ms-link" href="#">Unassigned Tickets</a></li>
-                            <li><a class="ms-link" href="#">Archived Tickets</a></li>
+                            <li><a class="ms-link" asp-controller="Tickets" asp-action="AllTickets">All Tickets</a></li>
+                            @if (!User.IsInRole(nameof(Roles.Admin)))
+                            {
+                                <li><a class="ms-link" asp-controller="Tickets" asp-action="MyTickets">My Tickets</a></li>
+                            }
+                            <li><a class="ms-link" asp-controller="Tickets" asp-action="Create">Add Tickets</a></li>
+                            @if (User.IsInRole(nameof(Roles.Admin)) || User.IsInRole(nameof(Roles.ProjectManager)))
+                            {
+                                <li><a class="ms-link" asp-controller="Tickets" asp-action="UnassignedTickets">Unassigned Tickets</a></li>
+                            }
+                            <li><a class="ms-link" asp-controller="Tickets" asp-action="ArchivedTickets">Archived Tickets</a></li>
                         </ul>
                     </li>
 
+                    @if (User.IsInRole(nameof(Roles.Admin)))
+                    {
                     <li class="collapsed">
                         <a class="m-link"
                            data-bs-toggle="collapse"
@@ -140,11 +154,12 @@
                         </a>
 
                         <ul class="sub-menu collapse" id="menu-Admin">
-                            <li><a class="ms-link" href="#">Company Invite</a></li>
-                            <li><a class="ms-link" href="#">Manage Roles</a></li>
-                            <li><a class="ms-link" href="#">Manage Projects</a></li>
+                            <li><a class="ms-link" asp-controller="Invites" asp-action="Create">Company Invite</a></li>
+                            <li><a class="ms-link" asp-controller="UserRoles" asp-action="ManageUserRoles">Manage Roles</a></li>
+                            <li><a class="ms-link" asp-controller="Projects" asp-action="AllProjects">Manage Projects</a></li>
                         </ul>
                     </li>
+                    }
                 </ul>
             </div>
         </div>

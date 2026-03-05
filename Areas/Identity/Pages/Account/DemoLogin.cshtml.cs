@@ -42,7 +42,7 @@ namespace TheBugTracker.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string user)
         {
-            string returnUrl = Url.Content("~/Home/Dashboard");
+            string returnUrl = Url.Content("~/Dashboard");
             string email = "";
             string password = "";
 
@@ -52,23 +52,29 @@ namespace TheBugTracker.Areas.Identity.Pages.Account
                 password = _config["DemoAdminPassword"];
             }
 
-            //if (user == "pm")
-            //{
-            //    email = _config["DemoProjectManagerUsername"];
-            //    password = _config["DemoProjectManagerPassword"];
-            //}
+            if (user == "pm")
+            {
+                email = _config["DemoProjectManagerUsername"];
+                password = _config["DemoProjectManagerPassword"];
+            }
 
-            //if (user == "dev")
-            //{
-            //    email = _config["DemoDeveloperUsername"];
-            //    password = _config["DemoDeveloperPassword"];
-            //}
+            if (user == "dev")
+            {
+                email = _config["DemoDeveloperUsername"];
+                password = _config["DemoDeveloperPassword"];
+            }
 
-            //if (user == "submitter")
-            //{
-            //    email = _config["DemoSubmitterUsername"];
-            //    password = _config["DemoSubmitterPassword"];
-            //}
+            if (user == "submitter")
+            {
+                email = _config["DemoSubmitterUsername"];
+                password = _config["DemoSubmitterPassword"];
+            }
+
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+            {
+                ModelState.AddModelError(string.Empty, "Demo credentials are not configured.");
+                return Page();
+            }
 
             var result = await _signInManager.PasswordSignInAsync(email, password, false, lockoutOnFailure: false);
             if (result.Succeeded)

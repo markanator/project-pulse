@@ -47,6 +47,7 @@ namespace TheBugTracker.Controllers
         }
 
         [Authorize]
+        [Route("dashboard")]
         public async Task<IActionResult> Dashboard()
         {
             DashboardViewModel model = new();

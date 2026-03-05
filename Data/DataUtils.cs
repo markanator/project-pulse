@@ -584,7 +584,7 @@ namespace TheBugTracker.Data
                 var user = await userManager.FindByEmailAsync(defaultUser.Email);
                 if (user == null)
                 {
-                    await userManager.CreateAsync(defaultUser, "Abc&123!");
+                    await userManager.CreateAsync(defaultUser, "Password123!");
                     await userManager.AddToRoleAsync(defaultUser, Roles.Admin.ToString());
                     await userManager.AddToRoleAsync(defaultUser, Roles.DemoUser.ToString());
 
@@ -615,7 +615,7 @@ namespace TheBugTracker.Data
                 var user = await userManager.FindByEmailAsync(defaultUser.Email);
                 if (user == null)
                 {
-                    await userManager.CreateAsync(defaultUser, "Abc&123!");
+                    await userManager.CreateAsync(defaultUser, "Password123!");
                     await userManager.AddToRoleAsync(defaultUser, Roles.ProjectManager.ToString());
                     await userManager.AddToRoleAsync(defaultUser, Roles.DemoUser.ToString());
                 }
@@ -645,7 +645,7 @@ namespace TheBugTracker.Data
                 var user = await userManager.FindByEmailAsync(defaultUser.Email);
                 if (user == null)
                 {
-                    await userManager.CreateAsync(defaultUser, "Abc&123!");
+                    await userManager.CreateAsync(defaultUser, "Password123!");
                     await userManager.AddToRoleAsync(defaultUser, Roles.Developer.ToString());
                     await userManager.AddToRoleAsync(defaultUser, Roles.DemoUser.ToString());
                 }
@@ -675,7 +675,7 @@ namespace TheBugTracker.Data
                 var user = await userManager.FindByEmailAsync(defaultUser.Email);
                 if (user == null)
                 {
-                    await userManager.CreateAsync(defaultUser, "Abc&123!");
+                    await userManager.CreateAsync(defaultUser, "Password123!");
                     await userManager.AddToRoleAsync(defaultUser, Roles.Submitter.ToString());
                     await userManager.AddToRoleAsync(defaultUser, Roles.DemoUser.ToString());
                 }
@@ -705,7 +705,7 @@ namespace TheBugTracker.Data
                 var user = await userManager.FindByEmailAsync(defaultUser.Email);
                 if (user == null)
                 {
-                    await userManager.CreateAsync(defaultUser, "Abc&123!");
+                    await userManager.CreateAsync(defaultUser, "Password123!");
                     await userManager.AddToRoleAsync(defaultUser, Roles.Submitter.ToString());
                     await userManager.AddToRoleAsync(defaultUser, Roles.DemoUser.ToString());
                 }
@@ -725,8 +725,8 @@ namespace TheBugTracker.Data
             try
             {
                 IList<Models.TicketType> ticketTypes = new List<Models.TicketType>() {
-                     new Models.TicketType() { Name = Models.Enums.TicketType.NewDevelopment.ToString() },      // Ticket involves development of a new, uncoded solution 
-                     new Models.TicketType() { Name = Models.Enums.TicketType.WorkTask.ToString() },            // Ticket involves development of the specific ticket description 
+                     new Models.TicketType() { Name = Models.Enums.TicketType.NewDevelopment.ToString() },      // Ticket involves development of a new, uncoded solution
+                     new Models.TicketType() { Name = Models.Enums.TicketType.WorkTask.ToString() },            // Ticket involves development of the specific ticket description
                      new Models.TicketType() { Name = Models.Enums.TicketType.Defect.ToString()},               // Ticket involves unexpected development/maintenance on a previously designed feature/functionality
                      new Models.TicketType() { Name = Models.Enums.TicketType.ChangeRequest.ToString() },       // Ticket involves modification development of a previously designed feature/functionality
                      new Models.TicketType() { Name = Models.Enums.TicketType.Enhancement.ToString() },         // Ticket involves additional development on a previously designed feature or new functionality
@@ -754,7 +754,7 @@ namespace TheBugTracker.Data
             {
                 IList<Models.TicketStatus> ticketStatuses = new List<Models.TicketStatus>() {
                     new Models.TicketStatus() { Name = Models.Enums.TicketStatus.New.ToString() },                 // Newly Created ticket having never been assigned
-                    new Models.TicketStatus() { Name = Models.Enums.TicketStatus.Developement.ToString() },         // Ticket is assigned and currently being worked 
+                    new Models.TicketStatus() { Name = Models.Enums.TicketStatus.Developement.ToString() },         // Ticket is assigned and currently being worked
                     new Models.TicketStatus() { Name = Models.Enums.TicketStatus.Testing.ToString()  },            // Ticket is assigned and is currently being tested
                     new Models.TicketStatus() { Name = Models.Enums.TicketStatus.Resolved.ToString()  },           // Ticket remains assigned to the developer but work in now complete
                 };
@@ -860,7 +860,7 @@ namespace TheBugTracker.Data
                                 new Ticket() {Title = "Blog Ticket 15", Description = "Ticket details for blog ticket 15", Created = DateTimeOffset.UtcNow, ProjectId = blogId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew,  TicketTypeId = typeChangeRequest},
                                 new Ticket() {Title = "Blog Ticket 16", Description = "Ticket details for blog ticket 16", Created = DateTimeOffset.UtcNow, ProjectId = blogId, TicketPriorityId = priorityUrgent, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
                                 new Ticket() {Title = "Blog Ticket 17", Description = "Ticket details for blog ticket 17", Created = DateTimeOffset.UtcNow, ProjectId = blogId, TicketPriorityId = priorityHigh, TicketStatusId = statusDev,  TicketTypeId = typeNewDev},
-                                //BUGTRACKER                                                                                                                         
+                                //BUGTRACKER
                                 new Ticket() {Title = "Bug Tracker Ticket 1", Description = "Ticket details for bug tracker ticket 1", Created = DateTimeOffset.UtcNow, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
                                 new Ticket() {Title = "Bug Tracker Ticket 2", Description = "Ticket details for bug tracker ticket 2", Created = DateTimeOffset.UtcNow, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},
                                 new Ticket() {Title = "Bug Tracker Ticket 3", Description = "Ticket details for bug tracker ticket 3", Created = DateTimeOffset.UtcNow, ProjectId = bugtrackerId, TicketPriorityId = priorityHigh, TicketStatusId = statusNew, TicketTypeId = typeNewDev},

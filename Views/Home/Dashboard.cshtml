@@ -16,8 +16,6 @@
 
 @{
 	ViewData["Title"] = "Dashboard";
-	
-    Layout = "~/Views/Shared/_MainLayout.cshtml";
 
 	BTUser currentUser = await UserManager.GetUserAsync(User);
 	Company company = await CompanyInfoService.GetCompanyInfoByIdAsync(currentUser.CompanyId);
