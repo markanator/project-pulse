@@ -16,4 +16,4 @@ run:
 	dotnet run --project TheBugTracker.csproj
 
 watch:
-	dotnet watch run --project TheBugTracker.csproj
+	dotnet watch run --project TheBugTracker.csproj --non-interactive
