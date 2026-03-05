@@ -198,7 +198,7 @@ namespace TheBugTracker.Controllers
 
                 try
                 {
-                    ticket.Created = DateTimeOffset.Now;
+                    ticket.Created = DateTimeOffset.UtcNow;
                     ticket.OwnerUserId = user.Id; // this is how EFCore saves relationships
                     ticket.TicketStatusId = (await _ticketService.LookupTicketStatusIdAsync(nameof(Models.Enums.TicketStatus.New))).Value;
 
@@ -271,7 +271,7 @@ namespace TheBugTracker.Controllers
 
                 try
                 {
-                    ticket.Updated = DateTimeOffset.Now;
+                    ticket.Updated = DateTimeOffset.UtcNow;
                     await _ticketService.UpdateTicketAsync(ticket);
 
                     // snapshot after updates
@@ -372,7 +372,7 @@ namespace TheBugTracker.Controllers
                 try
                 {
                     ticketComment.UserId = _userManagerService.GetUserId(User);
-                    ticketComment.Created = DateTimeOffset.Now;
+                    ticketComment.Created = DateTimeOffset.UtcNow;
 
                     await _ticketService.AddTicketCommentAsync(ticketComment);
 
@@ -404,7 +404,7 @@ namespace TheBugTracker.Controllers
                     ticketAttachment.FileName = ticketAttachment.FormFile.FileName;
                     ticketAttachment.FileContentType = ticketAttachment.FormFile.ContentType;
 
-                    ticketAttachment.Created = DateTimeOffset.Now;
+                    ticketAttachment.Created = DateTimeOffset.UtcNow;
                     ticketAttachment.UserId = _userManagerService.GetUserId(User);
 
                     await _ticketService.AddTicketAttachmentAsync(ticketAttachment);

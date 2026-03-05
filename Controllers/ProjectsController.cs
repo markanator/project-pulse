@@ -210,6 +210,8 @@ namespace TheBugTracker.Controllers
                         model.Project.ImageContentType = model.Project.ImageFormFile.ContentType;
                     }
                     model.Project.CompanyId = companyId;
+                    model.Project.StartDate = model.Project.StartDate.ToUniversalTime();
+                    model.Project.EndDate = model.Project.EndDate.ToUniversalTime();
                     // save changes
                     await _projectService.AddNewProjectAsync(model.Project);
 
@@ -225,7 +227,7 @@ namespace TheBugTracker.Controllers
                     throw;
                 }
                 // TODO: redirect to all projects
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(AllProjects));
             }
             return RedirectToAction("Create");
         }
@@ -263,6 +265,8 @@ namespace TheBugTracker.Controllers
                         model.Project.ImageContentType = model.Project.ImageFormFile.ContentType;
                     }
 
+                    model.Project.StartDate = model.Project.StartDate.ToUniversalTime();
+                    model.Project.EndDate = model.Project.EndDate.ToUniversalTime();
                     // save changes
                     await _projectService.UpdateProjectAsync(model.Project);
 
@@ -284,7 +288,7 @@ namespace TheBugTracker.Controllers
                     }
                 }
                 // TODO: redirect to all projects
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(AllProjects));
             }
 
             return RedirectToAction(nameof(Edit));
@@ -320,7 +324,7 @@ namespace TheBugTracker.Controllers
 
             await _projectService.ArchiveProjectAsync(project);
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(AllProjects));
         }
 
         // GET: Projects/Restore/5
@@ -351,7 +355,7 @@ namespace TheBugTracker.Controllers
             var project = await _projectService.GetProjectByIdAsync(id, User.Identity.GetCompanyId().Value);
             await _projectService.RestoreProjectAsync(project);
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(AllProjects));
         }
 
         private async Task<bool> ProjectExists(int id)
