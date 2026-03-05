@@ -365,3 +365,6 @@ MigrationBackup/
 FodyWeavers.xsd
 
 .vscode
+.claude
+.vexp
+vexp.toml
