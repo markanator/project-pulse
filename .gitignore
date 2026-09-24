@@ -368,3 +368,5 @@ FodyWeavers.xsd
 .claude
 .vexp
 vexp.toml
+.ai/**
+**/.DS_Store/**
